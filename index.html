@@ -17,63 +17,61 @@
         }
     }
     function playRound(playerSelection, computerSelection, playerScore, computerScore) {
+        console.log(`The computer selected ${computerSelection}.`);
+        console.log(`You selected ${playerSelection}.`)
         if (playerSelection == computerSelection) {
             let matchOutcome = "Match is a draw";
             console.log(matchOutcome);
-            console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-            return [playerScore, computerScore];
+            var result = "Draw";
+            return result;
         } else if (playerSelection == "rock") {
             if (computerSelection == "paper") {
-                computerScore = computerScore + 1;
                 let matchOutcome = "You Lose! Paper beats Rock";
                 console.log(matchOutcome);
-                console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-                return [playerScore, computerScore];
+                var result = "Loss";
+                return result;
             } else if (computerSelection == "scissors"){
-                playerScore = playerScore + 1;
                 let matchOutcome = "You Win! Rock beats scissors";
                 console.log(matchOutcome);
-                console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-                return [playerScore, computerScore];
+                var result = "Win";
+                return result;
             }
         } else if (playerSelection == "paper") {
             if (computerSelection == "scissors") {
-                computerScore = computerScore + 1;
                 let matchOutcome = "You Lose! Scissors beats paper";
                 console.log(matchOutcome);
-                console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-                return [playerScore, computerScore];
+                var result = "Loss";
+                return result;
             } else if (computerSelection == "rock") {
-                playerScore = playerScore + 1;
                 let matchOutcome = "You Win! Paper beats rock";
                 console.log(matchOutcome);
-                console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-                return [playerScore, computerScore];
+                var result = "Win";
+                return result;
             }
         } else if (playerSelection == "scissors") {
             if (computerSelection == "rock") {
-                computerScore = computerScore + 1;
                 let matchOutcome = "You Lose! Rock beats scissors";
                 console.log(matchOutcome);
-                console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-                return [playerScore, computerScore];
+                var result = "Loss";
+                return result;
             } else if (computerSelection == "paper") {
-                playerScore = playerScore + 1;
                 let matchOutcome = "You Win! Scissors beats paper";
                 console.log(matchOutcome);
-                console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-                return [playerScore, computerScore];
+                var result = "Win";
+                return result;
             }
         } else {
                 let matchOutcome = "Invalid entry! Please enter Rock, Paper, or Scissors."
                 console.log(matchOutcome);
-                console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
-                return [playerScore, computerScore];
-            }
+                var result = "Draw";
+                return result;
+            }  
+        return result
     }
     function game(playerSelection, playerScore, computerScore) {
         let computerSelection = computerPlay();
-        playRound(playerSelection, computerSelection, playerScore, computerScore);
+        let matchOutcome = playRound(playerSelection, computerSelection, playerScore, computerScore);
+        return matchOutcome;
     }
     
     let playerScore = 0;
@@ -82,7 +80,19 @@
     for (i = 1; i = 5; i++){
         let playerSelection = prompt("Hello, please enter Rock, Paper, or Scissors.", "")
         playerSelection.toLowerCase();
-        game(playerSelection, playerScore, computerScore); // NOTE currently have a problem where I need to return 2 variables to come back to add to the next iteration but that is not happening.
+        var matchOutcome = game(playerSelection, playerScore, computerScore);
+        let answer = matchOutcome.includes('Win');
+        if (answer === true) {
+            playerScore = playerScore + 1;
+            computerScore = computerScore;
+            console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+        } else if (answer === false) {
+            computerScore = computerScore + 1;
+            playerScore = playerScore;
+            console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+        } else {
+            console.log(`Your score is ${playerScore} and the computer's score is ${computerScore}`);
+        }
     }
 </script>
 </body>
